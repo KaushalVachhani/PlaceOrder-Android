@@ -23,7 +23,8 @@
             android:name=".Activity.MenuDisplayActivity_"
             android:hardwareAccelerated="true" />
         <activity android:name=".Activity.ProductActivity_" />
-
+        <activity android:name=".Activity.BaseActivity_" />
+        <activity android:name=".Activity.WholeProductActivity_"></activity>
     </application>
 
 </manifest>

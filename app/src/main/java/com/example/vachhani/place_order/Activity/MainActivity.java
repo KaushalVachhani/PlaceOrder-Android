@@ -24,7 +24,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.vachhani.place_order.Adapter.TablesAdapter;
 import com.example.vachhani.place_order.R;
-import com.example.vachhani.place_order.Adapter.TableAdapter;
 import com.example.vachhani.place_order.Data.Tables;
 import com.example.vachhani.place_order.Utils.Utility;
 

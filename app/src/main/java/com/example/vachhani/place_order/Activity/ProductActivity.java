@@ -1,11 +1,10 @@
 package com.example.vachhani.place_order.Activity;
 
 import android.app.ProgressDialog;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,13 +17,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.vachhani.place_order.Adapter.MainCategoryAdapter;
 import com.example.vachhani.place_order.Adapter.ProductAdapter;
-import com.example.vachhani.place_order.Data.Category;
 import com.example.vachhani.place_order.Data.Product;
 import com.example.vachhani.place_order.R;
 import com.example.vachhani.place_order.Utils.Utility;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 import org.json.JSONArray;
@@ -41,8 +41,11 @@ public class ProductActivity extends BaseActivity {
 
     ProgressDialog pd;
 
+    @Bean
+    ProductAdapter adapter;
+
     @ViewById
-    ListView lstProduct;
+    RecyclerView rvProduct;
 
     @ViewById
     Toolbar toolbar;
@@ -51,7 +54,6 @@ public class ProductActivity extends BaseActivity {
     TextView txtTitle;
 
     ArrayList<Product> list=new ArrayList<>();
-    ProductAdapter adapter;
     public String parent_id;
 
 
@@ -61,6 +63,8 @@ public class ProductActivity extends BaseActivity {
         pd = Utility.getDialog(this);
         setSupportActionBar(toolbar);
         txtTitle.setText(getString(R.string.select_item));
+        rvProduct.setLayoutManager(new GridLayoutManager(this, 2));
+        rvProduct.setAdapter(adapter);
         parent_id=getIntent().getStringExtra("parent_id");
         load();
     }
@@ -86,9 +90,7 @@ public class ProductActivity extends BaseActivity {
                                 product.productDetails=array.getJSONObject(i).getString("details");
                                 list.add(product);
                             }
-
-                            adapter=new ProductAdapter(ProductActivity.this,list);
-                            lstProduct.setAdapter(adapter);
+                            adapter.setList(list);
                             pd.dismiss();
 
                         } catch (JSONException e) {

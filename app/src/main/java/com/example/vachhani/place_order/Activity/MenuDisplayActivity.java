@@ -2,9 +2,10 @@ package com.example.vachhani.place_order.Activity;
 
 import android.app.ProgressDialog;
 import android.support.design.widget.TabLayout;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -15,12 +16,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.vachhani.place_order.Adapter.CategoryAdapter;
+import com.example.vachhani.place_order.Adapter.MainCategoryAdapter;
+import com.example.vachhani.place_order.Adapter.TablesAdapter;
 import com.example.vachhani.place_order.Data.Category;
 import com.example.vachhani.place_order.R;
 import com.example.vachhani.place_order.Utils.Utility;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 import org.json.JSONArray;
@@ -37,10 +40,12 @@ public class MenuDisplayActivity extends BaseActivity {
     ProgressDialog pd;
     String category_type;
     ArrayList<Category> list = new ArrayList<>();
-    CategoryAdapter adapter;
+
+    @Bean
+    MainCategoryAdapter adapter;
 
     @ViewById
-    ListView lvcat;
+    RecyclerView rvMainCat;
 
     @ViewById
     Toolbar toolbar;
@@ -57,6 +62,8 @@ public class MenuDisplayActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+        rvMainCat.setLayoutManager(new GridLayoutManager(this, 1));
+        rvMainCat.setAdapter(adapter);
         txtTitle.setText(getString(R.string.select_menu));
         tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.vegetarian)), true);
         tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.non_vegetarian)));
@@ -99,16 +106,13 @@ public class MenuDisplayActivity extends BaseActivity {
 
                             for (int i = 0; i < array.length(); i++) {
                                 Category category = new Category();
-                                Log.d("id", array.getJSONObject(i).getJSONObject("id").getString("$id"));
                                 category.category_name = array.getJSONObject(i).getString("name");
                                 category.category_id = array.getJSONObject(i).getJSONObject("id").getString("$id");
-                                Log.d("id", category.category_id);
                                 category.img = array.getJSONObject(i).getString("img");
                                 list.add(category);
 
                             }
-                            adapter = new CategoryAdapter(getApplicationContext(), list);
-                            lvcat.setAdapter(adapter);
+                            adapter.setList(list);
                             pd.dismiss();
                         } catch (JSONException e) {
                             e.printStackTrace();

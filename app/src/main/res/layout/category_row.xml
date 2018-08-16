@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/llcrow"
+    android:id="@+id/llMainCat"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
@@ -19,23 +19,24 @@
         android:layout_height="200dp"
         android:background="#90000000" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/img_cat"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:src="@drawable/ic_table"
-        android:visibility="gone" />
+    <!--<de.hdodenhof.circleimageview.CircleImageView-->
+        <!--android:id="@+id/img_cat"-->
+        <!--android:layout_width="60dp"-->
+        <!--android:layout_height="60dp"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_margin="10dp"-->
+        <!--android:src="@drawable/ic_table"-->
+        <!--android:visibility="gone" />-->
 
     <TextView
-        android:id="@+id/tv_cat"
+        android:id="@+id/tvCat"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:fontFamily="@font/funky_fonts"
         android:gravity="center"
         android:text="category"
         android:textColor="@color/primaryTextColor"
-        android:textSize="25sp" />
+        android:textSize="30sp"
+        android:textStyle="bold"/>
 
 </RelativeLayout>
