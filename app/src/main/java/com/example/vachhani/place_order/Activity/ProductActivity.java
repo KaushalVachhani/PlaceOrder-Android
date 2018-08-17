@@ -85,6 +85,7 @@ public class ProductActivity extends BaseActivity {
                             for(int i=0;i<array.length();i++){
                                 Product product =new Product();
                                 product.productName=array.getJSONObject(i).getString("name");
+                                product.productId= array.getJSONObject(i).getJSONObject("id").getString("$id");
                                 product.productImage=array.getJSONObject(i).getString("img");
                                 product.productPrice=array.getJSONObject(i).getString("price");
                                 product.productDetails=array.getJSONObject(i).getString("details");

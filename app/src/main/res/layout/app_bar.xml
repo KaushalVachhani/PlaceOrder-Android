@@ -4,6 +4,7 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingRight="12dp"
     android:background="@color/colorPrimaryDark"
     app:titleTextColor="@android:color/white"
     app:navigationIcon="@drawable/ic_back">

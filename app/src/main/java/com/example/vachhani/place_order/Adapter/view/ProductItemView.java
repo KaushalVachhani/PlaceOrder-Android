@@ -44,6 +44,6 @@ public class ProductItemView extends LinearLayout {
 
     @Click
     void rlProduct() {
-        getContext().startActivity(new Intent(getContext(), WholeProductActivity_.class));
+        getContext().startActivity(new Intent(getContext(), WholeProductActivity_.class).putExtra("productId",data.productId).putExtra("productName",data.productName).putExtra("productImg",data.productImage).putExtra("productPrice",data.productPrice).putExtra("productDetails",data.productDetails));
     }
 }
