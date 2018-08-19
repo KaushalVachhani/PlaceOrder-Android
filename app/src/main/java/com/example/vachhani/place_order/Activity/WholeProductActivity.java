@@ -115,18 +115,17 @@ public class WholeProductActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void setBadge(){
-        txtBadge.setText("12121");
-    }
-    /*
+//    public void setBadge(){
+//        txtBadge.setText("12121");
+//    }
+
     @OptionsItem(R.id.menu_item)
     void onMenuItemClick(MenuItem menuItem) {
-        Snackbar snackbar = Snackbar.make(rlProduct, "Item added to order", Snackbar.LENGTH_LONG);
+        Snackbar snackbar = Snackbar.make(rlProduct, "Item added to cart", Snackbar.LENGTH_LONG);
         snackbar.show();
-    }*/
+    }
 
     void onOrderClik() {
-        setBadge();
         Snackbar snackbar = Snackbar.make(rlProduct, "Item added to order", Snackbar.LENGTH_LONG);
         snackbar.show();
     }
