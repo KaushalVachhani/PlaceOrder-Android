@@ -20,7 +20,7 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:src="@drawable/pizza" />
+            android:src="@drawable/ic_pizza" />
 
         <TextView
             android:id="@+id/txtProductName"

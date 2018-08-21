@@ -19,14 +19,6 @@
         android:layout_height="200dp"
         android:background="#90000000" />
 
-    <!--<de.hdodenhof.circleimageview.CircleImageView-->
-        <!--android:id="@+id/img_cat"-->
-        <!--android:layout_width="60dp"-->
-        <!--android:layout_height="60dp"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:layout_margin="10dp"-->
-        <!--android:src="@drawable/ic_table"-->
-        <!--android:visibility="gone" />-->
 
     <TextView
         android:id="@+id/tvCat"

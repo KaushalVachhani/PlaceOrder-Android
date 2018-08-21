@@ -25,7 +25,7 @@
         <activity android:name=".Activity.ProductActivity_" />
         <activity android:name=".Activity.BaseActivity_" />
         <activity android:name=".Activity.WholeProductActivity_" />
-        <activity android:name=".Activity.CartActivity"></activity>
+        <activity android:name=".Activity.CartActivity_"></activity>
     </application>
 
 </manifest>

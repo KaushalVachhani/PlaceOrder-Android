@@ -15,4 +15,5 @@
     </string-array>
     <string name="title_activity_base">BaseActivity</string>
     <string name="menu_item">menu_item</string>
+    <string name="cart_item">cart_items</string>
 </resources>
