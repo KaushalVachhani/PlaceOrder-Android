@@ -7,4 +7,7 @@
         android:title="@string/menu_item"
         app:showAsAction="always"
         android:actionLayout="@layout/menu_badge"/>
+
+
+
 </menu>

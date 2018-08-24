@@ -202,6 +202,7 @@ public class WholeProductActivity extends BaseActivity {
                     e.printStackTrace();
                 }
                 startActivity(new Intent(WholeProductActivity.this, CartActivity_.class));
+                finish();
             }
         });
 
