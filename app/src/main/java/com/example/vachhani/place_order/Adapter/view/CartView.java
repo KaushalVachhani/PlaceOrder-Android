@@ -32,14 +32,18 @@ import org.androidannotations.annotations.ViewById;
 @EViewGroup(R.layout.cart_row)
 public class CartView extends LinearLayout {
 
-    Context context=getContext();
-    DataContext dataContext=new DataContext(context);
+    Context context = getContext();
+    DataContext dataContext = new DataContext(context);
 
     @ViewById
     TextView txtProductName, txtQty, txtTotal, txtRemove;
 
     @ViewById
     ImageView imgProduct;
+
+    @ViewById
+    LinearLayout llCart;
+
 
     TableCart data;
 
@@ -51,11 +55,13 @@ public class CartView extends LinearLayout {
         this.data = data;
         int total = (data.price) * (data.qty);
         txtProductName.setText(data.product_name);
-        txtQty.setText(String.valueOf(data.qty));
-        txtTotal.setText(String.valueOf(total));
+        txtQty.setText(String.valueOf("Quantity : " + data.qty));
+        txtTotal.setText(String.valueOf("Total : " + total));
+        Log.e("name_____________", data.product_name);
         Picasso.with(getContext()).load(data.product_img).into(imgProduct);
 
     }
+
     @Click
     void txtRemove() {
         try {
@@ -64,16 +70,12 @@ public class CartView extends LinearLayout {
             TableCart cart = dataContext.userObjectSet.get(0);
             cart.setStatus(Entity.STATUS_DELETED);
             dataContext.userObjectSet.save();
-            new AlertDialog.Builder(getContext()).setMessage("Item is removed !!").setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.dismiss();
-                }
-            }).show();
+            Snackbar snackbar = Snackbar.make(llCart, "Item deleted!!!!", Snackbar.LENGTH_SHORT);
+            snackbar.show();
         } catch (AdaFrameworkException e) {
             e.printStackTrace();
         }
 
-        ((CartActivity)context).refresh();
+        ((CartActivity) context).refresh();
     }
 }

@@ -3,6 +3,7 @@ package com.example.vachhani.place_order.Adapter.view;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.example.vachhani.place_order.Activity.MenuDisplayActivity_;
 import com.example.vachhani.place_order.Data.Tables;
 import com.example.vachhani.place_order.R;
+import com.example.vachhani.place_order.Utils.Utility;
 
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
@@ -44,6 +46,7 @@ public class TableItemView extends LinearLayout {
     @Click
     void root() {
         if (data.status.equalsIgnoreCase("1")) {
+            Utility.set_table(getContext(), Integer.parseInt(data.tableNo));
             getContext().startActivity(new Intent(getContext(), MenuDisplayActivity_.class));
         } else
             new AlertDialog.Builder(getContext()).setMessage("opps!!!! \n \nTable is already booked").setPositiveButton("OK", new DialogInterface.OnClickListener() {

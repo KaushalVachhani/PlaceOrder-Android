@@ -2,7 +2,9 @@ package com.example.vachhani.place_order.Utils;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 
 public class Utility {
@@ -16,4 +18,20 @@ public class Utility {
     }
 
     public static String api="http://192.168.43.229/API/";
+
+    public static void set_table(Context context,int i)
+    {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("tableNo", String.valueOf(i));
+        editor.apply();
+    }
+    public static String get_table(Context context)
+    {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        String table = preferences.getString("tableNo", "");
+        return table;
+    }
+
+
 }

@@ -1,32 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llCart"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:id="@+id/llCart"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    android:orientation="vertical">
 
-    <include layout="@layout/app_bar"/>
+    <include layout="@layout/app_bar" />
 
-    <android.support.v7.widget.RecyclerView
+    <TextView
+        android:gravity="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="25dp"
+        android:layout_marginBottom="50dp"
+        android:id="@+id/txtEmpty"
         android:layout_below="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/rvCart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
         android:layout_marginBottom="55dp">
 
     </android.support.v7.widget.RecyclerView>
 
     <TextView
-        android:layout_alignParentBottom="true"
+        android:id="@+id/txtTotal"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:textSize="15sp"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textColor="@color/primaryTextColor"
+        android:layout_alignParentBottom="true"
         android:background="@color/colorPrimaryDark"
-        android:text="Total Amount : 1000"/>
+        android:gravity="center"
+        android:text="Total Amount : 1000"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>

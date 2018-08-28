@@ -14,7 +14,7 @@
         <item>Drinks</item>
     </string-array>
     <string name="title_activity_base">BaseActivity</string>
-    <string name="menu_item">menu_item</string>
-    <string name="cart_item">cart_items</string>
+    <string name="menu_item">Menu Items</string>
+    <string name="cart_item">Cart Items</string>
     <string name="order">order</string>
 </resources>

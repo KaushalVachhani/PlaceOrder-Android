@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -70,6 +71,7 @@ public class MenuDisplayActivity extends BaseActivity {
         tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.drinks)));
         category_type = "0";
         list.clear();
+        Toast.makeText(this, "table no:" + Utility.get_table(this), Toast.LENGTH_SHORT).show();
         load();
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
