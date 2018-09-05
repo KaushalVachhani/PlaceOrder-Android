@@ -42,7 +42,6 @@ import java.util.Map;
 @EActivity(R.layout.activity_main)
 public class MainActivity extends BaseActivity {
 
-    ProgressDialog pd;
 
     @ViewById
     RecyclerView rvTables;
@@ -60,7 +59,7 @@ public class MainActivity extends BaseActivity {
 
     @AfterViews
     void init(){
-        pd = Utility.getDialog(this);
+        loads();
         load();
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(false);

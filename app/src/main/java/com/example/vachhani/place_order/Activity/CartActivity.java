@@ -81,7 +81,7 @@ public class CartActivity extends BaseActivity {
     @AfterViews
     public void init() {
 
-
+        loads();
         pd = Utility.getDialog(this);
         setSupportActionBar(toolbar);
         txtTitle.setText(getString(R.string.cart_item));
@@ -172,7 +172,7 @@ public class CartActivity extends BaseActivity {
             map.put("product_id", dataContext.userObjectSet.get(i).product_id);
             map.put("qty", String.valueOf(dataContext.userObjectSet.get(i).qty));
             map.put("price", String.valueOf(dataContext.userObjectSet.get(i).price));
-            map.put("table_no", Utility.get_table(this));
+            map.put("table_no", String.valueOf(appPreferences.getInteger("tableNo")));
             wordList.add(map);
         }
         Gson gson = new GsonBuilder().create();

@@ -59,6 +59,8 @@ public class MenuDisplayActivity extends BaseActivity {
 
     @AfterViews
     void init() {
+        loads();
+        Toast.makeText(this, "table no:" + appPreferences.getInteger("tableNo"), Toast.LENGTH_SHORT).show();
         pd = Utility.getDialog(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -71,7 +73,6 @@ public class MenuDisplayActivity extends BaseActivity {
         tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.drinks)));
         category_type = "0";
         list.clear();
-        Toast.makeText(this, "table no:" + Utility.get_table(this), Toast.LENGTH_SHORT).show();
         load();
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
