@@ -25,6 +25,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.vachhani.place_order.Adapter.TablesAdapter;
 import com.example.vachhani.place_order.R;
 import com.example.vachhani.place_order.Data.Tables;
+import com.example.vachhani.place_order.Utils.TokenRefresh;
 import com.example.vachhani.place_order.Utils.Utility;
 
 import org.androidannotations.annotations.AfterViews;
@@ -42,6 +43,7 @@ import java.util.Map;
 @EActivity(R.layout.activity_main)
 public class MainActivity extends BaseActivity {
 
+    TokenRefresh tokenRefresh;
 
     @ViewById
     RecyclerView rvTables;
@@ -60,6 +62,8 @@ public class MainActivity extends BaseActivity {
     @AfterViews
     void init(){
         loads();
+        tokenRefresh=new TokenRefresh(this);
+        tokenRefresh.onTokenRefresh();
         load();
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(false);

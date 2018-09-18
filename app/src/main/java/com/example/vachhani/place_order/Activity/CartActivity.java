@@ -1,10 +1,7 @@
 package com.example.vachhani.place_order.Activity;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -12,10 +9,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -26,11 +21,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.vachhani.place_order.Adapter.CartAdapter;
-import com.example.vachhani.place_order.Adapter.TablesAdapter;
 import com.example.vachhani.place_order.Data.DataContext;
-import com.example.vachhani.place_order.Data.Product;
 import com.example.vachhani.place_order.Data.TableCart;
-import com.example.vachhani.place_order.Data.Tables;
 import com.example.vachhani.place_order.R;
 import com.example.vachhani.place_order.Utils.Utility;
 import com.google.gson.Gson;
@@ -43,9 +35,6 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.ViewById;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -93,6 +82,7 @@ public class CartActivity extends BaseActivity {
 
     }
 
+    //This method will get all cart items
     private void fillCart() {
         try {
             dataContext.userObjectSet.fill();
@@ -124,7 +114,7 @@ public class CartActivity extends BaseActivity {
 
     }
 
-
+    //This method will refresh the data as item deletes
     public void refresh() {
         list.clear();
         fillCart();
@@ -158,6 +148,7 @@ public class CartActivity extends BaseActivity {
         load();
     }
 
+    //
     public String composeJSONfromSQLite() {
         try {
             dataContext.userObjectSet.fill();
@@ -173,6 +164,8 @@ public class CartActivity extends BaseActivity {
             map.put("qty", String.valueOf(dataContext.userObjectSet.get(i).qty));
             map.put("price", String.valueOf(dataContext.userObjectSet.get(i).price));
             map.put("table_no", String.valueOf(appPreferences.getInteger("tableNo")));
+            map.put("token", appPreferences.getString("token"));
+            Log.i("token--------->",appPreferences.getString("token"));
             wordList.add(map);
         }
         Gson gson = new GsonBuilder().create();
@@ -194,8 +187,7 @@ public class CartActivity extends BaseActivity {
                         Log.i("RESPONSE----->", s);
                         try {
                             dataContext.userObjectSet.fill();
-                            for (int i=0;i<dataContext.userObjectSet.size();i++)
-                            {
+                            for (int i = 0; i < dataContext.userObjectSet.size(); i++) {
                                 TableCart cart = dataContext.userObjectSet.get(i);
                                 cart.setStatus(Entity.STATUS_DELETED);
                             }

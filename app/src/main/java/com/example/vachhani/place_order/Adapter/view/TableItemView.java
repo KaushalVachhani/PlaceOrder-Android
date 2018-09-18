@@ -23,6 +23,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.vachhani.place_order.Activity.BaseActivity;
 import com.example.vachhani.place_order.Activity.CartActivity;
+import com.example.vachhani.place_order.Activity.MenuDisplayActivity;
 import com.example.vachhani.place_order.Activity.MenuDisplayActivity_;
 import com.example.vachhani.place_order.Data.Tables;
 import com.example.vachhani.place_order.R;
@@ -71,7 +72,7 @@ public class TableItemView extends LinearLayout {
             appPreferences=new AppPreferences(getContext());
             Log.d("table number------->", data.tableNo);
             appPreferences.set("tableNo", Integer.parseInt(data.tableNo));
-            load();
+           // load();
             getContext().startActivity(new Intent(getContext(), MenuDisplayActivity_.class));
         } else
             new AlertDialog.Builder(getContext()).setMessage("opps!!!! \n \nTable is already booked").setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -82,41 +83,42 @@ public class TableItemView extends LinearLayout {
             }).show();
 
     }
-    public void load(){
-
-        pd.show();
-
-        StringRequest request=new StringRequest(Request.Method.GET,Utility.api+"p7_settable.php",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String s) {
-                        pd.dismiss();
-                        Log.i("RESPONSE----->", s);
-                    }
-                }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                pd.dismiss();
-                Log.d("error", String.valueOf(volleyError));
-            }
-        }
-        ){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("table_id",data.tableNo);
-                return params;
-            }
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-        request.setRetryPolicy(new DefaultRetryPolicy(
-                7000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        requestQueue.add(request);
-
-    }
+//    public void load(){
+//
+//        pd=new ProgressDialog(this);
+//        pd.show();
+//
+//        StringRequest request=new StringRequest(Request.Method.GET,Utility.api+"p7_settable.php",
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String s) {
+//                        pd.dismiss();
+//                        Log.i("RESPONSE----->", s);
+//                    }
+//                }, new Response.ErrorListener() {
+//
+//            @Override
+//            public void onErrorResponse(VolleyError volleyError) {
+//                pd.dismiss();
+//                Log.d("error", String.valueOf(volleyError));
+//            }
+//        }
+//        ){
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<>();
+//                params.put("table_id",data.tableNo);
+//                return params;
+//            }
+//        };
+//
+//        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+//        request.setRetryPolicy(new DefaultRetryPolicy(
+//                7000,
+//                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+//                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+//        requestQueue.add(request);
+//
+//    }
 
 }
