@@ -30,11 +30,9 @@
         <activity android:name=".Activity.ProductActivity_" />
         <activity android:name=".Activity.BaseActivity_" />
         <activity android:name=".Activity.WholeProductActivity_" />
-        <activity android:name=".Activity.CartActivity_"></activity>
-
+        <activity android:name=".Activity.CartActivity_" />
 
         <service android:name=".Utils.TokenRefresh">
-
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
@@ -43,14 +41,9 @@
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-        </service>
-
-        &lt;application android:name=".ApplicationContextProvider"
-        android:label="@string/app_name"&gt;
-        
+        </service> &lt;application android:name=".ApplicationContextProvider"
+        android:label="@string/app_name">
+        <activity android:name=".Activity.OrderDetailActivity"></activity>
     </application>
-
-
-
 
 </manifest>

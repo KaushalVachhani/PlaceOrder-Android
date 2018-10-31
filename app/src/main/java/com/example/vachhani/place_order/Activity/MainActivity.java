@@ -54,15 +54,15 @@ public class MainActivity extends BaseActivity {
     @ViewById
     TextView txtTitle;
 
-    ArrayList<Tables> list=new ArrayList<>();
+    ArrayList<Tables> list = new ArrayList<>();
 
     @Bean
     TablesAdapter adapter;
 
     @AfterViews
-    void init(){
+    void init() {
         loads();
-        tokenRefresh=new TokenRefresh(this);
+        tokenRefresh = new TokenRefresh(this);
         tokenRefresh.onTokenRefresh();
         load();
         setSupportActionBar(toolbar);
@@ -73,25 +73,30 @@ public class MainActivity extends BaseActivity {
         rvTables.setAdapter(adapter);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        load();
+    }
 
-    public void load(){
+    public void load() {
 
         pd.show();
 
-        StringRequest request=new StringRequest(Request.Method.GET,Utility.api+"p3_tables.php",
+        StringRequest request = new StringRequest(Request.Method.GET, Utility.api + "p3_tables.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
                         try {
-                            JSONObject object=new JSONObject(s);
-                            JSONObject object1=object.getJSONObject("Response");
-                            JSONArray array=object1.getJSONArray("table");
+                            JSONObject object = new JSONObject(s);
+                            JSONObject object1 = object.getJSONObject("Response");
+                            JSONArray array = object1.getJSONArray("table");
                             Log.d("Response", String.valueOf(array));
-
-                            for(int i=0;i<array.length();i++){
-                                Tables tables=new Tables();
-                                tables.tableNo=array.getJSONObject(i).getString("table");
-                                tables.status=array.getJSONObject(i).getString("status");
+                            list.clear();
+                            for (int i = 0; i < array.length(); i++) {
+                                Tables tables = new Tables();
+                                tables.tableNo = array.getJSONObject(i).getString("table");
+                                tables.status = array.getJSONObject(i).getString("status");
                                 list.add(tables);
                             }
                             adapter.setList(list);
@@ -110,7 +115,7 @@ public class MainActivity extends BaseActivity {
                 Log.d("error", String.valueOf(volleyError));
             }
         }
-        ){
+        ) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();

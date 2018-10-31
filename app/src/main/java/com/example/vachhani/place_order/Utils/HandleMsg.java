@@ -11,13 +11,14 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.example.vachhani.place_order.Activity.CartActivity_;
-import com.example.vachhani.place_order.Activity.MainActivity;
+import com.example.vachhani.place_order.Activity.OrderDetailActivity;
 import com.example.vachhani.place_order.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Date;
 
@@ -56,10 +57,11 @@ public class HandleMsg extends FirebaseMessagingService {
 
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
+            Log.e("data", String.valueOf(remoteMessage.getData()));
             Log.d("", "Message Notification Body:---------> " + remoteMessage.getNotification().getBody());
             Log.d("NOTIFICATION--------->", "From: " + remoteMessage.getFrom().toString());
 
-            sendNotification(remoteMessage.getNotification().getBody(), remoteMessage.getNotification().getTitle(), "");
+            sendNotification(remoteMessage, "");
 
         }
 
@@ -68,7 +70,11 @@ public class HandleMsg extends FirebaseMessagingService {
     }
 
 
-    private void sendNotification(String messageBody, String title, String id) {
+    private void sendNotification(RemoteMessage remoteMessage, String id) {
+
+        try {
+            JSONObject json = new JSONObject(remoteMessage.getData().toString());
+            String order_id = json.getString("order_id");
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
 
@@ -84,16 +90,17 @@ public class HandleMsg extends FirebaseMessagingService {
             mChannel.enableVibration(true);
             mChannel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
 
-            Intent intent = new Intent(this, CartActivity_.class);
-            intent.putExtra("msg", messageBody);
+            Intent intent = new Intent(this, OrderDetailActivity.class);
+            intent.putExtra("msg", remoteMessage.getNotification().getBody());
+            intent.putExtra("oderId",order_id);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP| Intent.FLAG_ACTIVITY_NEW_TASK);
 
-
-            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, fcid, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
                     .setSmallIcon(R.mipmap.ic_launcher)
-                    .setContentTitle(title)
-                    .setContentText(messageBody)
+                    .setContentTitle(remoteMessage.getNotification().getTitle())
+                    .setContentText(remoteMessage.getNotification().getBody())
                     .setContentIntent(pendingIntent)
                     .setColor(255)
                     .setAutoCancel(true);
@@ -105,15 +112,18 @@ public class HandleMsg extends FirebaseMessagingService {
 
         } else {
             //Intent intent = new Intent(this, AnnouncementDetails_.class);
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.putExtra("msg", messageBody);
-            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            Intent intent = new Intent(this, OrderDetailActivity.class);
+            intent.putExtra("msg", remoteMessage.getNotification().getBody());
+            intent.putExtra("oderId",order_id);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, fcid, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                     .setSmallIcon(R.mipmap.ic_launcher)
-                    .setContentTitle(title)
-                    .setContentText(messageBody)
+                    .setContentTitle(remoteMessage.getNotification().getTitle())
+                    .setContentText(remoteMessage.getNotification().getBody())
                     .setContentIntent(pendingIntent)
                     .setDefaults(Notification.DEFAULT_ALL)
                     .setPriority(Notification.PRIORITY_HIGH)
@@ -126,5 +136,9 @@ public class HandleMsg extends FirebaseMessagingService {
             notificationManager.notify(fcid, notificationBuilder.build());
 
         }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 }

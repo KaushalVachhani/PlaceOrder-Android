@@ -9,9 +9,9 @@
     <include layout="@layout/app_bar" />
 
     <ScrollView
-        android:layout_below="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
         android:layout_marginBottom="50dp">
 
         <LinearLayout
@@ -86,7 +86,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:text="Description:" />
+                        android:text="Description:"
+                        android:textStyle="bold"/>
 
                     <TextView
                         android:id="@+id/txtDesc"
@@ -97,6 +98,35 @@
                         android:text="Margerita Pizza Margerita Pizza Margerita Pizza Margerita Pizza Margerita Pizza Margerita Pizza Margerita Pizza"
                         android:textColor="@color/dark_gray"
                         android:textSize="16sp" />
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cv1"
+                android:layout_margin="5dp"
+                android:padding="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Toppings.."
+                        android:textStyle="bold"/>
+
+                    <EditText
+                        android:id="@+id/edtToppings"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>

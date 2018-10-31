@@ -9,7 +9,7 @@ import android.preference.PreferenceManager;
 
 public class Utility {
     private static ProgressDialog pd;
-    public static ProgressDialog getDialog(Activity activity) {
+    public static ProgressDialog getDialog(Context activity) {
         pd = new ProgressDialog(activity);
         pd.setMessage("Please Wait...");
         pd.setIndeterminate(true);

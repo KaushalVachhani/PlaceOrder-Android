@@ -97,7 +97,7 @@ public class WholeProductActivity extends BaseActivity {
         productId = getIntent().getStringExtra("productId");
         productImg = getIntent().getStringExtra("productImg");
         txtProductName.setText(productName);
-        txtPrice.setText(productPrice);
+        txtPrice.setText(productPrice+" rs");
         txtDesc.setText(productDetails);
         Picasso.with(getApplicationContext()).load(productImg).into(imgProduct);
         btnAddOrder.setOnClickListener(new View.OnClickListener() {
