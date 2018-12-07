@@ -4,7 +4,7 @@
 
 
     <item android:id="@+id/menu_item1"
-        android:title="@string/order"
+        android:title="@string/pay"
         app:showAsAction="always"
         android:actionLayout="@layout/menu_badge" />
 

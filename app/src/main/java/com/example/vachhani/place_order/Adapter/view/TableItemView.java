@@ -73,7 +73,7 @@ public class TableItemView extends LinearLayout {
             appPreferences=new AppPreferences(getContext());
             Log.d("table number------->", data.tableNo);
             appPreferences.set("tableNo", Integer.parseInt(data.tableNo));
-            load();
+            //load();
             getContext().startActivity(new Intent(getContext(), MenuDisplayActivity_.class));
         } else
             new AlertDialog.Builder(getContext()).setMessage("opps!!!! \n \nTable is already booked").setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -108,7 +108,6 @@ public class TableItemView extends LinearLayout {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("table_id",data.tableNo);
-                Log.d("tableID----------------->",data.tableNo);
                 return params;
             }
         };

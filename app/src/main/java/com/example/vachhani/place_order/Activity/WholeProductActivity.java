@@ -97,13 +97,13 @@ public class WholeProductActivity extends BaseActivity {
         productId = getIntent().getStringExtra("productId");
         productImg = getIntent().getStringExtra("productImg");
         txtProductName.setText(productName);
-        txtPrice.setText(productPrice+" rs");
+        txtPrice.setText(productPrice + " rs");
         txtDesc.setText(productDetails);
         Picasso.with(getApplicationContext()).load(productImg).into(imgProduct);
         btnAddOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onOrderClik();
+                onAddToCart();
             }
         });
 /*
@@ -145,7 +145,8 @@ public class WholeProductActivity extends BaseActivity {
 
     AlertDialog dialog;
 
-    void onOrderClik() {
+    //On click of add to cart dialog will open to select quantity and then cart will be displayed.
+    void onAddToCart() {
 
         LayoutInflater inflater = getLayoutInflater();
         View alertLayout = inflater.inflate(R.layout.custom_qty_dialog, null);
@@ -156,8 +157,7 @@ public class WholeProductActivity extends BaseActivity {
         Button btnDone = alertLayout.findViewById(R.id.btnDone);
 
 
-        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        dialog = alertDialog.create();
+        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         //this is set the view from XML inside AlertDialog
         alertDialog.setView(alertLayout);
 
@@ -167,7 +167,7 @@ public class WholeProductActivity extends BaseActivity {
         btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                alertDialog.dismiss();
                 qty++;
                 txtQty.setText(String.valueOf(qty));
 
@@ -178,6 +178,7 @@ public class WholeProductActivity extends BaseActivity {
         btnMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                alertDialog.dismiss();
                 if (qty > 1) {
                     qty--;
                     txtQty.setText(String.valueOf(qty));
@@ -208,6 +209,7 @@ public class WholeProductActivity extends BaseActivity {
 
         // Showing Alert Message
         alertDialog.show();
+
     }
 
     @Override

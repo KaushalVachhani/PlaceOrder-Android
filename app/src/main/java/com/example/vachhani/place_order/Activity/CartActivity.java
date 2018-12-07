@@ -1,16 +1,22 @@
 package com.example.vachhani.place_order.Activity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -24,24 +30,30 @@ import com.example.vachhani.place_order.Adapter.CartAdapter;
 import com.example.vachhani.place_order.Data.DataContext;
 import com.example.vachhani.place_order.Data.TableCart;
 import com.example.vachhani.place_order.R;
+import com.example.vachhani.place_order.Utils.Payment;
 import com.example.vachhani.place_order.Utils.Utility;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mobandme.ada.Entity;
 import com.mobandme.ada.exceptions.AdaFrameworkException;
+import com.razorpay.Checkout;
+import com.razorpay.PaymentResultListener;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.ViewById;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.android.volley.VolleyLog.TAG;
+
 @EActivity(R.layout.activity_cart)
-public class CartActivity extends BaseActivity {
+public class CartActivity extends BaseActivity implements PaymentResultListener {
 
     DataContext dataContext = new DataContext(this);
     ArrayList<TableCart> list = new ArrayList<>();
@@ -143,12 +155,59 @@ public class CartActivity extends BaseActivity {
 //        return super.onOptionsItemSelected(item);
 //    }
 
+    AlertDialog dialog;
+
+    //on pay button click payment options will be open
     @OptionsItem(R.id.menu_item1)
     void onMenuItemClick(MenuItem menuItem) {
-        load();
+
+        if (checkCart()) {
+            LayoutInflater inflater = getLayoutInflater();
+            View alertLayout = inflater.inflate(R.layout.custom_payment_dialog, null);
+            Button btnCash = alertLayout.findViewById(R.id.btnCash);
+            Button btnOnline = alertLayout.findViewById(R.id.btnOnline);
+
+            final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setView(alertLayout);
+
+            btnCash.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    alertDialog.dismiss();
+                    load();
+                }
+            });
+
+            btnOnline.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    alertDialog.dismiss();
+                    startPayment(CartActivity.this);
+                }
+            });
+
+            alertDialog.show();
+        } else {
+            Snackbar snackbar = Snackbar.make(llCart, "No items in cart!!!", Snackbar.LENGTH_SHORT);
+            snackbar.show();
+        }
+
     }
 
-    //
+    private boolean checkCart() {
+        try {
+            dataContext.userObjectSet.fill();
+        } catch (AdaFrameworkException e) {
+            e.printStackTrace();
+        }
+        if (dataContext.userObjectSet.size() > 0) //Is there any item in cart or not will be checked
+            return true;
+        else
+            return false;
+
+    }
+
+
     public String composeJSONfromSQLite() {
         try {
             dataContext.userObjectSet.fill();
@@ -165,7 +224,7 @@ public class CartActivity extends BaseActivity {
             map.put("price", String.valueOf(dataContext.userObjectSet.get(i).price));
             map.put("table_no", String.valueOf(appPreferences.getInteger("tableNo")));
             map.put("token", appPreferences.getString("token"));
-            Log.i("token--------->",appPreferences.getString("token"));
+            Log.i("token--------->", appPreferences.getString("token"));
             wordList.add(map);
         }
         Gson gson = new GsonBuilder().create();
@@ -173,7 +232,7 @@ public class CartActivity extends BaseActivity {
         return gson.toJson(wordList);
     }
 
-
+    //method to place order.
     public void load() {
 
         pd.show();
@@ -199,10 +258,6 @@ public class CartActivity extends BaseActivity {
                         refresh();
                         Snackbar snackbar = Snackbar.make(llCart, "order is placed!!!!", Snackbar.LENGTH_SHORT);
                         snackbar.show();
-//                        rvCart.setVisibility(View.GONE);
-//                        txtEmpty.setVisibility(View.VISIBLE);
-//                        txtEmpty.setText("No Items in cart ! ");
-//                        txtTotal.setText("Total Amount : " + String.valueOf(total));
 
                     }
                 }, new Response.ErrorListener() {
@@ -229,6 +284,60 @@ public class CartActivity extends BaseActivity {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(request);
 
+    }
+
+    //method which integrate the payment gateway.
+    public void startPayment(Context context) {
+        /*
+          You need to pass current activity in order to let Razorpay create CheckoutActivity
+         */
+
+        final Checkout co = new Checkout();
+
+        try {
+            JSONObject options = new JSONObject();
+            options.put("name", "Razorpay Corp");
+            options.put("description", "Demoing Charges");
+            //You can omit the image option to fetch the image from dashboard
+            options.put("image", "https://s3.amazonaws.com/rzp-mobile/images/rzp.png");
+            options.put("currency", "INR");
+            options.put("amount", "100");
+
+            JSONObject preFill = new JSONObject();
+            preFill.put("email", "test@razorpay.com");
+            preFill.put("contact", "9999999999");
+
+            options.put("prefill", preFill);
+
+            co.open((Activity) context, options);
+        } catch (Exception e) {
+            Toast.makeText(context, "Error in payment: " + e.getMessage(), Toast.LENGTH_SHORT)
+                    .show();
+            e.printStackTrace();
+        }
+    }
+
+    @SuppressWarnings("unused")
+    @Override
+    public void onPaymentSuccess(String razorpayPaymentID) {
+        try {
+            //Toast.makeText(this, "Payment Successful: " + razorpayPaymentID, Toast.LENGTH_SHORT).show();
+            Log.d("payment successful : ", razorpayPaymentID);
+            load(); //order placement method will be called after successful payment.
+        } catch (Exception e) {
+            Log.e(TAG, "Exception in onPaymentSuccess", e);
+        }
+    }
+
+    @SuppressWarnings("unused")
+    @Override
+    public void onPaymentError(int code, String response) {
+        try {
+            //Toast.makeText(this, "Payment failed: " + code + " " + response, Toast.LENGTH_SHORT).show();
+            Log.d("Payment failed: ", "" + code);
+        } catch (Exception e) {
+            Log.e(TAG, "Exception in onPaymentError", e);
+        }
     }
 
 

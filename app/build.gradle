@@ -4,7 +4,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.example.vachhani.place_order"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -40,6 +40,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-gcm:15.0.1'
     implementation 'com.google.zxing:core:3.2.1'
     implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
+    implementation 'com.razorpay:checkout:1.4.9'
 
 }
 
