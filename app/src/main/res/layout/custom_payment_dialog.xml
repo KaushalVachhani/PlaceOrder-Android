@@ -26,7 +26,7 @@
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_margin="10dp"
-            android:background="@color/colorPrimaryDark"
+            android:background="@drawable/circular_corner"
             android:text="cash"
             android:textColor="@color/primaryTextColor" />
 
@@ -35,7 +35,7 @@
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_margin="10dp"
-            android:background="@color/colorPrimaryDark"
+            android:background="@drawable/circular_corner"
             android:text="online"
             android:textColor="@color/primaryTextColor" />
 

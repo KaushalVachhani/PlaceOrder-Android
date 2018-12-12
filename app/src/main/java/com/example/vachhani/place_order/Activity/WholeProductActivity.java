@@ -167,7 +167,6 @@ public class WholeProductActivity extends BaseActivity {
         btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                alertDialog.dismiss();
                 qty++;
                 txtQty.setText(String.valueOf(qty));
 
@@ -178,7 +177,6 @@ public class WholeProductActivity extends BaseActivity {
         btnMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                alertDialog.dismiss();
                 if (qty > 1) {
                     qty--;
                     txtQty.setText(String.valueOf(qty));
@@ -190,6 +188,7 @@ public class WholeProductActivity extends BaseActivity {
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                alertDialog.dismiss();
                 TableCart tableCart = new TableCart();
                 tableCart.product_id = productId;
                 tableCart.product_name = productName;

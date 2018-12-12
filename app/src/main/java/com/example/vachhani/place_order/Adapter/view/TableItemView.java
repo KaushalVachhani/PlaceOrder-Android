@@ -1,16 +1,13 @@
 package com.example.vachhani.place_order.Adapter.view;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -22,21 +19,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.vachhani.place_order.Activity.BaseActivity;
-import com.example.vachhani.place_order.Activity.CartActivity;
-import com.example.vachhani.place_order.Activity.MenuDisplayActivity;
 import com.example.vachhani.place_order.Activity.MenuDisplayActivity_;
 import com.example.vachhani.place_order.Data.Tables;
 import com.example.vachhani.place_order.R;
-import com.example.vachhani.place_order.Utils.AppPreferences;
+import com.example.vachhani.place_order.Utils.CPref_;
 import com.example.vachhani.place_order.Utils.Utility;
 
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.androidannotations.annotations.sharedpreferences.Pref;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -44,7 +36,9 @@ import java.util.Map;
 @EViewGroup(R.layout.table_row)
 public class TableItemView extends LinearLayout {
 
-    AppPreferences appPreferences;
+    @Pref
+    CPref_ cPref;
+
     ProgressDialog pd;
     @ViewById
     TextView txtTableNo;
@@ -70,10 +64,11 @@ public class TableItemView extends LinearLayout {
     @Click
     void root() {
         if (data.status.equalsIgnoreCase("1")) {
-            appPreferences=new AppPreferences(getContext());
+
             Log.d("table number------->", data.tableNo);
-            appPreferences.set("tableNo", Integer.parseInt(data.tableNo));
-            //load();
+
+            //set the table number in pref.
+            cPref.table_num().put(Integer.valueOf(data.tableNo));
             getContext().startActivity(new Intent(getContext(), MenuDisplayActivity_.class));
         } else
             new AlertDialog.Builder(getContext()).setMessage("opps!!!! \n \nTable is already booked").setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -84,15 +79,16 @@ public class TableItemView extends LinearLayout {
             }).show();
 
     }
-    public void load(){
+
+    public void load() {
 
         Utility.getDialog(getContext());
 
-        StringRequest request=new StringRequest(Request.Method.POST,Utility.api+"p7_settable.php",
+        StringRequest request = new StringRequest(Request.Method.POST, Utility.api + "p7_settable.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
-                       // pd.dismiss();
+                        // pd.dismiss();
                         Log.i("RESPONSE----->", s);
                     }
                 }, new Response.ErrorListener() {
@@ -103,11 +99,11 @@ public class TableItemView extends LinearLayout {
                 Log.d("error", String.valueOf(volleyError));
             }
         }
-        ){
+        ) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("table_id",data.tableNo);
+                params.put("table_id", data.tableNo);
                 return params;
             }
         };

@@ -30,7 +30,6 @@ import com.example.vachhani.place_order.Adapter.CartAdapter;
 import com.example.vachhani.place_order.Data.DataContext;
 import com.example.vachhani.place_order.Data.TableCart;
 import com.example.vachhani.place_order.R;
-import com.example.vachhani.place_order.Utils.Payment;
 import com.example.vachhani.place_order.Utils.Utility;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -191,6 +190,7 @@ public class CartActivity extends BaseActivity implements PaymentResultListener 
             Snackbar snackbar = Snackbar.make(llCart, "No items in cart!!!", Snackbar.LENGTH_SHORT);
             snackbar.show();
         }
+        
 
     }
 
@@ -222,9 +222,9 @@ public class CartActivity extends BaseActivity implements PaymentResultListener 
             map.put("product_id", dataContext.userObjectSet.get(i).product_id);
             map.put("qty", String.valueOf(dataContext.userObjectSet.get(i).qty));
             map.put("price", String.valueOf(dataContext.userObjectSet.get(i).price));
-            map.put("table_no", String.valueOf(appPreferences.getInteger("tableNo")));
-            map.put("token", appPreferences.getString("token"));
-            Log.i("token--------->", appPreferences.getString("token"));
+            map.put("table_no", pref.table_num().get()+"");
+            map.put("token", pref.token().get());
+            Log.i("token--------->", pref.token().get());
             wordList.add(map);
         }
         Gson gson = new GsonBuilder().create();
@@ -243,7 +243,7 @@ public class CartActivity extends BaseActivity implements PaymentResultListener 
                     public void onResponse(String s) {
                         pd.hide();
                         pd.dismiss();
-                        Log.i("RESPONSE----->", s);
+                        Log.i("RESPONSE----->", s );
                         try {
                             dataContext.userObjectSet.fill();
                             for (int i = 0; i < dataContext.userObjectSet.size(); i++) {

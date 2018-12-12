@@ -1,18 +1,10 @@
 package com.example.vachhani.place_order.Activity;
 
-import android.app.ProgressDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -23,8 +15,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.vachhani.place_order.Adapter.TablesAdapter;
-import com.example.vachhani.place_order.R;
 import com.example.vachhani.place_order.Data.Tables;
+import com.example.vachhani.place_order.R;
 import com.example.vachhani.place_order.Utils.TokenRefresh;
 import com.example.vachhani.place_order.Utils.Utility;
 
@@ -62,7 +54,7 @@ public class MainActivity extends BaseActivity {
     @AfterViews
     void init() {
         loads();
-        tokenRefresh = new TokenRefresh(this);
+        tokenRefresh = new TokenRefresh(this,pref);
         tokenRefresh.onTokenRefresh();
         load();
         setSupportActionBar(toolbar);

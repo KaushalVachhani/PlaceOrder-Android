@@ -147,25 +147,27 @@
             <Button
                 android:id="@+id/btnAddOrder"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:background="@color/colorPrimaryDark"
+                android:background="@drawable/circular_corner"
                 android:drawableLeft="@drawable/ic_shopping_cart"
-                android:padding="5dp"
-                android:text="add to order"
+                android:drawablePadding="-20dp"
+                android:paddingLeft="20dp"
+                android:text="add"
                 android:textColor="@color/primaryTextColor" />
 
             <Button
                 android:id="@+id/btnAddFav"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:background="@color/colorPrimaryDark"
+                android:background="@drawable/circular_corner"
                 android:drawableLeft="@drawable/ic_favorite"
-                android:padding="5dp"
-                android:text="Add to favourite"
+                android:paddingLeft="20dp"
+                android:drawablePadding="-20dp"
+                android:text="favourite"
                 android:textColor="@color/primaryTextColor" />
 
 

@@ -2,10 +2,13 @@ package com.example.vachhani.place_order.Activity;
 
 import android.app.ProgressDialog;
 import android.support.design.widget.TabLayout;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,7 +21,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.vachhani.place_order.Adapter.MainCategoryAdapter;
-import com.example.vachhani.place_order.Adapter.TablesAdapter;
 import com.example.vachhani.place_order.Data.Category;
 import com.example.vachhani.place_order.R;
 import com.example.vachhani.place_order.Utils.Utility;
@@ -36,14 +38,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 @EActivity(R.layout.activity_menu_display)
-public class MenuDisplayActivity extends BaseActivity {
+public class MenuDisplayActivity extends BaseActivity  {
 
     ProgressDialog pd;
     String category_type;
     ArrayList<Category> list = new ArrayList<>();
+    private ActionBarDrawerToggle mToggle;
 
     @Bean
     MainCategoryAdapter adapter;
+
+    @ViewById
+    DrawerLayout drawer;
 
     @ViewById
     RecyclerView rvMainCat;
@@ -60,19 +66,33 @@ public class MenuDisplayActivity extends BaseActivity {
     @AfterViews
     void init() {
         loads();
-        Toast.makeText(this, "table no:" + appPreferences.getInteger("tableNo"), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "table no:" + pref.table_num().get(), Toast.LENGTH_SHORT).show();
         pd = Utility.getDialog(this);
+
+
+        //toolbar setting
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         rvMainCat.setLayoutManager(new GridLayoutManager(this, 1));
         rvMainCat.setAdapter(adapter);
         txtTitle.setText(getString(R.string.select_menu));
+
+        //setting of toggle in drawer
+        mToggle = new ActionBarDrawerToggle(this,drawer,R.string.open,R.string.close);
+        drawer.addDrawerListener(mToggle);
+        mToggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //setting tab layout
         tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.vegetarian)), true);
         tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.non_vegetarian)));
         tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.drinks)));
+
+        //By default tab layout will be 0.
         category_type = "0";
         list.clear();
+
+        //initialization of food menu.
         load();
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -92,6 +112,14 @@ public class MenuDisplayActivity extends BaseActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (mToggle.onOptionsItemSelected(item))
+            return true;
+        return super.onOptionsItemSelected(item);
     }
 
     public void load() {

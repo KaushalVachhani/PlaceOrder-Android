@@ -8,14 +8,17 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
     <style name="ToolbarTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">15dp</item>
         <item name="android:textColorPrimary">@color/primaryTextColor</item>
         <item name="android:textColorSecondary">@color/primaryTextColor</item>
         <item name="android:textColor">@color/primaryTextColor</item>
-    </style>`
+    </style>
+    `
 </resources>
