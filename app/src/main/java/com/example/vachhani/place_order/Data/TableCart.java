@@ -1,12 +1,10 @@
 package com.example.vachhani.place_order.Data;
 
-import android.content.Entity;
-
 import com.mobandme.ada.annotations.Table;
 import com.mobandme.ada.annotations.TableField;
 
 @Table(name = "cart")
-public class TableCart extends com.mobandme.ada.Entity{
+public class    TableCart extends com.mobandme.ada.Entity{
 
     @TableField(name = "user_id",datatype = DATATYPE_STRING)
     public String user_id;

@@ -6,9 +6,6 @@ import android.util.Log;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
-/**
- * Created by nisarg on 05/09/18.
- */
 
 public class TokenRefresh extends FirebaseInstanceIdService{
 

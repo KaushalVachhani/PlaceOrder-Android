@@ -1,7 +1,12 @@
 package com.example.vachhani.place_order.Activity;
 
 import android.app.ProgressDialog;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.GridLayoutManager;
@@ -9,6 +14,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +29,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.vachhani.place_order.Adapter.MainCategoryAdapter;
 import com.example.vachhani.place_order.Data.Category;
+import com.example.vachhani.place_order.Fragments.OrderFragment;
 import com.example.vachhani.place_order.R;
 import com.example.vachhani.place_order.Utils.Utility;
 
@@ -38,12 +46,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 @EActivity(R.layout.activity_menu_display)
-public class MenuDisplayActivity extends BaseActivity  {
+public class MenuDisplayActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     ProgressDialog pd;
     String category_type;
     ArrayList<Category> list = new ArrayList<>();
     private ActionBarDrawerToggle mToggle;
+    NavigationView navigationView;
 
     @Bean
     MainCategoryAdapter adapter;
@@ -78,10 +87,12 @@ public class MenuDisplayActivity extends BaseActivity  {
         txtTitle.setText(getString(R.string.select_menu));
 
         //setting of toggle in drawer
-        mToggle = new ActionBarDrawerToggle(this,drawer,R.string.open,R.string.close);
+        mToggle = new ActionBarDrawerToggle(this, drawer, R.string.open, R.string.close);
         drawer.addDrawerListener(mToggle);
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
         //setting tab layout
         tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.vegetarian)), true);
@@ -120,6 +131,38 @@ public class MenuDisplayActivity extends BaseActivity  {
         if (mToggle.onOptionsItemSelected(item))
             return true;
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+
+        Fragment fragment = null;
+        int id = item.getItemId();
+
+        if (id == R.id.nav_camera) {
+            fragment = new OrderFragment();
+
+        } else if (id == R.id.nav_gallery) {
+            fragment = new OrderFragment();
+
+        } else if (id == R.id.nav_manage) {
+
+
+        } else if (id == R.id.nav_slideshow) {
+
+
+        }
+        if (fragment != null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            FrameLayout navScreen = findViewById(R.id.navScreen);
+            navScreen.setVisibility(View.VISIBLE);
+            fragmentTransaction.replace(R.id.navScreen, fragment);
+            fragmentTransaction.commit();
+
+        }
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
     public void load() {
@@ -175,4 +218,6 @@ public class MenuDisplayActivity extends BaseActivity  {
         requestQueue.add(request);
 
     }
+
+
 }

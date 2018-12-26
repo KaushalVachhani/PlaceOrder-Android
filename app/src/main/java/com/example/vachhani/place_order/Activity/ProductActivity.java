@@ -1,13 +1,14 @@
 package com.example.vachhani.place_order.Activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.widget.ListView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -17,7 +18,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.vachhani.place_order.Adapter.MainCategoryAdapter;
 import com.example.vachhani.place_order.Adapter.ProductAdapter;
 import com.example.vachhani.place_order.Data.Product;
 import com.example.vachhani.place_order.R;
@@ -26,6 +26,8 @@ import com.example.vachhani.place_order.Utils.Utility;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.OptionsItem;
+import org.androidannotations.annotations.OptionsMenuItem;
 import org.androidannotations.annotations.ViewById;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -53,6 +55,9 @@ public class ProductActivity extends BaseActivity {
     @ViewById
     TextView txtTitle;
 
+    @OptionsMenuItem
+    MenuItem menu_item;
+
     ArrayList<Product> list=new ArrayList<>();
     public String parent_id;
 
@@ -69,6 +74,19 @@ public class ProductActivity extends BaseActivity {
         load();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+
+        final MenuItem menuItem = menu.findItem(R.id.menu_item);
+        menuItem.getActionView();
+        return true;
+    }
+
+    @OptionsItem(R.id.menu_item)
+    void onMenuItemClick(MenuItem menuItem) {
+        startActivity(new Intent(this, CartActivity_.class));
+    }
     public void load(){
 
         pd.show();
