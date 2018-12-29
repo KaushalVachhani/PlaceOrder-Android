@@ -224,6 +224,7 @@ public class CartActivity extends BaseActivity implements PaymentResultListener 
             map.put("price", String.valueOf(dataContext.userObjectSet.get(i).price));
             map.put("table_no", pref.table_num().get()+"");
             map.put("token", pref.token().get());
+            map.put("mobile",pref.mobile_num().get());
             Log.i("token--------->", pref.token().get());
             wordList.add(map);
         }

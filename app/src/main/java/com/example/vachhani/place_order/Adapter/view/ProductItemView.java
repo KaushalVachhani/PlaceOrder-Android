@@ -2,10 +2,10 @@ package com.example.vachhani.place_order.Adapter.view;
 
 import android.content.Context;
 import android.support.design.widget.Snackbar;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.vachhani.place_order.Data.DataContext;
 import com.example.vachhani.place_order.Data.Product;
@@ -26,7 +26,7 @@ public class ProductItemView extends LinearLayout {
 
     int qty = 0;
     DataContext dataContext = new DataContext(getContext());
-    TableCart tableCart = new TableCart();
+    TableCart tableCart = null;
     ArrayList<TableCart> list = new ArrayList<>();
     @ViewById
     TextView txtProductName, txtPrice, txtMinus, txtQty, txtAdd;
@@ -59,27 +59,27 @@ public class ProductItemView extends LinearLayout {
     @Click
     void txtMinus() {
         qty--;
+        Toast.makeText(getContext(), String.valueOf(qty), Toast.LENGTH_SHORT).show();
         setView();
         unsetItem();
     }
 
 
-
-
     @Click
     void txtAdd() {
         qty++;
-        setItem();
+        Toast.makeText(getContext(), String.valueOf(qty), Toast.LENGTH_SHORT).show();
         setView();
+        setItem();
 
     }
 
     @Click
     void txtQty() {
         qty++;
-        setItem();
+        Toast.makeText(getContext(), String.valueOf(qty), Toast.LENGTH_SHORT).show();
         setView();
-
+        setItem();
 
     }
 
@@ -104,19 +104,19 @@ public class ProductItemView extends LinearLayout {
 
         try {
             dataContext.userObjectSet.fill();
-            TableCart cart;
             for (int i = 0; i < dataContext.userObjectSet.size(); i++) {
                 if (dataContext.userObjectSet.get(i).product_id.equals(data.productId)) {
-                    cart = dataContext.userObjectSet.get(i);
-                    cart.qty = qty;
-                    cart.setStatus(Entity.STATUS_UPDATED);
-                    dataContext.userObjectSet.save(cart);
+                    tableCart = dataContext.userObjectSet.get(i);
+                    tableCart.qty = qty;
+                    Toast.makeText(getContext(), tableCart.product_name + "qty" + tableCart.qty, Toast.LENGTH_SHORT).show();
+                    tableCart.setStatus(Entity.STATUS_UPDATED);
+                    dataContext.userObjectSet.save(tableCart);
                     flag = 1;
                 }
             }
 
-            if (flag ==0)
-            {
+            if (flag == 0) {
+                tableCart = new TableCart();
                 tableCart.product_id = data.productId;
                 tableCart.product_name = data.productName;
                 tableCart.product_img = data.productImage;
@@ -135,24 +135,28 @@ public class ProductItemView extends LinearLayout {
         }
 
 
-
-
     }
 
     private void unsetItem() {
 
         try {
             dataContext.userObjectSet.fill();
-            TableCart cart;
             for (int i = 0; i < dataContext.userObjectSet.size(); i++) {
-                if (dataContext.userObjectSet.get(i).product_id.equals(data.productId)) {
-                    Log.d("qty", String.valueOf(qty));
-                    cart = dataContext.userObjectSet.get(i);
-                    cart.qty = qty;
-                    cart.setStatus(Entity.STATUS_UPDATED);
-                    dataContext.userObjectSet.save(cart);
-                }
+                if (dataContext.userObjectSet.get(i).product_id.equals(data.productId))
+                    tableCart = dataContext.userObjectSet.get(i);
             }
+            if (this.qty > 0) {
+                tableCart.qty = this.qty;
+                Toast.makeText(getContext(), tableCart.product_name + "qty" + tableCart.qty, Toast.LENGTH_SHORT).show();
+                tableCart.setStatus(Entity.STATUS_UPDATED);
+                dataContext.userObjectSet.save(tableCart);
+            } else {
+                Toast.makeText(getContext(), tableCart.product_name + "qty" + tableCart.qty, Toast.LENGTH_SHORT).show();
+                tableCart.setStatus(Entity.STATUS_DELETED);
+                dataContext.userObjectSet.save(tableCart);
+            }
+
+
         } catch (AdaFrameworkException e) {
             e.printStackTrace();
         }

@@ -2,6 +2,7 @@
     <string name="app_name">place_order</string>
     <string name="select_table">Select Table</string>
     <string name="select_menu">Food Menu</string>
+    <string name="order">Orders</string>
     <string name="registration">Registration</string>
     <string name="select_item">Select Items</string>
     <string name="vegetarian">Vegetarian</string>

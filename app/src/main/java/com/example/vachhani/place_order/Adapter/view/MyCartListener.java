@@ -14,5 +14,7 @@ class MyCartListener implements View.OnClickListener {
         Intent intent = new Intent(view.getContext(), CartActivity_.class);
         view.getContext().startActivity(intent);
 
+
+
     }
 }
