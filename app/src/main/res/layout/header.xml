@@ -12,6 +12,7 @@
         android:src="@drawable/user"/>
 
     <TextView
+        android:fontFamily="@font/myfont"
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,6 +22,7 @@
         android:textStyle="bold" />
 
     <TextView
+        android:fontFamily="@font/myfont"
         android:id="@+id/mobile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

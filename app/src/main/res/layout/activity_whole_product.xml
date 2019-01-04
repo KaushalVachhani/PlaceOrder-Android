@@ -28,7 +28,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
-                android:src="@drawable/ic_pizza" />
+                 />
 
             <android.support.v7.widget.CardView
                 android:id="@+id/cv1"

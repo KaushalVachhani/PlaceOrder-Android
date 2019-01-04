@@ -11,8 +11,7 @@
         android:id="@+id/imgCat"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_table" />
+        android:scaleType="fitXY" />
 
     <View
         android:layout_width="match_parent"
@@ -29,6 +28,6 @@
         android:text="category"
         android:textColor="@color/primaryTextColor"
         android:textSize="30sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
 </RelativeLayout>

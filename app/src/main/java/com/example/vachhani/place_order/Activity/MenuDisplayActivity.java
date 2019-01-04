@@ -14,7 +14,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.vachhani.place_order.Fragments.MenuFragment_;
-import com.example.vachhani.place_order.Fragments.OrderFragment;
+import com.example.vachhani.place_order.Fragments.OrderFragment_;
 import com.example.vachhani.place_order.R;
 import com.example.vachhani.place_order.Utils.Utility;
 
@@ -73,6 +73,7 @@ public class MenuDisplayActivity extends BaseActivity implements NavigationView.
         username.setText(pref.userName().get());
         mobile.setText(pref.mobile_num().get());
 
+
     }
 
     //Method to load fragments as per drawer item selection.
@@ -98,10 +99,12 @@ public class MenuDisplayActivity extends BaseActivity implements NavigationView.
         int id = item.getItemId();
 
         if (id == R.id.nav_menu) {
+            txtTitle.setText(getString(R.string.select_menu));
+            fragment = new MenuFragment_();
 
         } else if (id == R.id.nav_order) {
             txtTitle.setText(getString(R.string.order));
-            fragment = new OrderFragment();
+            fragment = new OrderFragment_();
 
         } else if (id == R.id.nav_manage) {
 

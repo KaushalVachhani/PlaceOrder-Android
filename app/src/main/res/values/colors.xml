@@ -8,4 +8,5 @@
     <color name="background">#a3f7b9</color>
     <color name="table">#b9a3f7</color>
     <color name="dark_gray">#666666</color>
+    <color name="dark_black">#000000</color>
 </resources>

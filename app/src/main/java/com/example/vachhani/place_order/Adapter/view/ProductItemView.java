@@ -5,7 +5,6 @@ import android.support.design.widget.Snackbar;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.vachhani.place_order.Data.DataContext;
 import com.example.vachhani.place_order.Data.Product;
@@ -59,7 +58,6 @@ public class ProductItemView extends LinearLayout {
     @Click
     void txtMinus() {
         qty--;
-        Toast.makeText(getContext(), String.valueOf(qty), Toast.LENGTH_SHORT).show();
         setView();
         unsetItem();
     }
@@ -68,7 +66,6 @@ public class ProductItemView extends LinearLayout {
     @Click
     void txtAdd() {
         qty++;
-        Toast.makeText(getContext(), String.valueOf(qty), Toast.LENGTH_SHORT).show();
         setView();
         setItem();
 
@@ -77,7 +74,6 @@ public class ProductItemView extends LinearLayout {
     @Click
     void txtQty() {
         qty++;
-        Toast.makeText(getContext(), String.valueOf(qty), Toast.LENGTH_SHORT).show();
         setView();
         setItem();
 
@@ -108,7 +104,6 @@ public class ProductItemView extends LinearLayout {
                 if (dataContext.userObjectSet.get(i).product_id.equals(data.productId)) {
                     tableCart = dataContext.userObjectSet.get(i);
                     tableCart.qty = qty;
-                    Toast.makeText(getContext(), tableCart.product_name + "qty" + tableCart.qty, Toast.LENGTH_SHORT).show();
                     tableCart.setStatus(Entity.STATUS_UPDATED);
                     dataContext.userObjectSet.save(tableCart);
                     flag = 1;
@@ -147,11 +142,9 @@ public class ProductItemView extends LinearLayout {
             }
             if (this.qty > 0) {
                 tableCart.qty = this.qty;
-                Toast.makeText(getContext(), tableCart.product_name + "qty" + tableCart.qty, Toast.LENGTH_SHORT).show();
                 tableCart.setStatus(Entity.STATUS_UPDATED);
                 dataContext.userObjectSet.save(tableCart);
             } else {
-                Toast.makeText(getContext(), tableCart.product_name + "qty" + tableCart.qty, Toast.LENGTH_SHORT).show();
                 tableCart.setStatus(Entity.STATUS_DELETED);
                 dataContext.userObjectSet.save(tableCart);
             }

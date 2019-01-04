@@ -16,11 +16,11 @@
         android:orientation="horizontal">
 
         <TextView
+            android:fontFamily="@font/myfont"
             android:id="@+id/txtTitle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Place order"
-            android:layout_marginLeft="10dp"
             android:textColor="@android:color/white"
             android:textSize="16sp"
             android:textStyle="bold"/>

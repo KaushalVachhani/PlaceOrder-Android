@@ -9,6 +9,7 @@
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:tabTextAppearance="@style/tab_text"
         app:tabMode="fixed"
         app:tabSelectedTextColor="@color/colorPrimary" />
 

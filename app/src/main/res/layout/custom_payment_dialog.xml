@@ -7,12 +7,13 @@
     android:orientation="vertical">
 
     <TextView
+        android:fontFamily="@font/myfont"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:gravity="center"
         android:text="Please select payment option. "
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -22,19 +23,25 @@
         android:orientation="horizontal">
 
         <Button
+            android:fontFamily="@font/myfont"
             android:id="@+id/btnCash"
             android:layout_width="100dp"
+            android:textSize="10sp"
             android:layout_height="40dp"
             android:layout_margin="10dp"
             android:background="@drawable/circular_corner"
             android:text="cash"
+            android:textStyle="bold"
             android:textColor="@color/primaryTextColor" />
 
         <Button
+            android:fontFamily="@font/myfont"
             android:id="@+id/btnOnline"
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_margin="10dp"
+            android:textStyle="bold"
+            android:textSize="10sp"
             android:background="@drawable/circular_corner"
             android:text="online"
             android:textColor="@color/primaryTextColor" />

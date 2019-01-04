@@ -45,7 +45,9 @@ import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.ViewById;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,6 +60,8 @@ public class CartActivity extends BaseActivity implements PaymentResultListener 
     ArrayList<TableCart> list = new ArrayList<>();
     TableCart cart;
     int total;
+    String currentDateandTime;
+    SimpleDateFormat sdf;
     ProgressDialog pd;
 
     @ViewById
@@ -90,6 +94,8 @@ public class CartActivity extends BaseActivity implements PaymentResultListener 
         list.clear();
         fillCart();
         txtTotal.setText("Total Amount : " + String.valueOf(total));
+        sdf= new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+        currentDateandTime = sdf.format(new Date());
 
     }
 
@@ -224,7 +230,8 @@ public class CartActivity extends BaseActivity implements PaymentResultListener 
             map.put("price", String.valueOf(dataContext.userObjectSet.get(i).price));
             map.put("table_no", pref.table_num().get()+"");
             map.put("token", pref.token().get());
-            map.put("mobile",pref.mobile_num().get());
+            map.put("uid",pref.userID().get());
+            map.put("datetime", String.valueOf(currentDateandTime));
             Log.i("token--------->", pref.token().get());
             wordList.add(map);
         }

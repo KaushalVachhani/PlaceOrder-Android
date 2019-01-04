@@ -5,4 +5,15 @@
         android:fontWeight="400"
         android:font="@font/funky_fonts" />
 
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/myfont" />
+
+
+
+
+
+
 </font-family>
+

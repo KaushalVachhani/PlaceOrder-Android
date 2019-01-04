@@ -20,5 +20,13 @@
         <item name="android:textColorSecondary">@color/primaryTextColor</item>
         <item name="android:textColor">@color/primaryTextColor</item>
     </style>
+
+    <style name="tab_text" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">@font/myfont</item>
+        <!--<item name="android:textColor">@color/dark_black</item>-->
+    </style>
+
     `
 </resources>

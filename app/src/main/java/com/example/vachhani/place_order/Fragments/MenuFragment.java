@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -18,7 +17,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.vachhani.place_order.Activity.BaseActivity;
 import com.example.vachhani.place_order.Adapter.MainCategoryAdapter;
 import com.example.vachhani.place_order.Data.Category;
 import com.example.vachhani.place_order.R;
@@ -60,8 +58,7 @@ public class MenuFragment extends Fragment {
 
     @AfterViews
     void init() {
-        Toast.makeText(getActivity(), "Inside menu fragment", Toast.LENGTH_SHORT).show();
-        ((BaseActivity) getActivity()).loads();
+
         pd = Utility.getDialog(getActivity());
         rvMainCat.setLayoutManager(new GridLayoutManager(getActivity(), 1));
         rvMainCat.setAdapter(adapter);
@@ -76,7 +73,6 @@ public class MenuFragment extends Fragment {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                Toast.makeText(getActivity(), String.valueOf(tab.getPosition()), Toast.LENGTH_SHORT).show();
                 category_type = String.valueOf(tab.getPosition());
                 list.clear();
                 load();
