@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -51,7 +50,6 @@ public class OrderFragment extends Fragment {
     @AfterViews
     void init() {
 
-        Toast.makeText(getActivity(), "Order fragment", Toast.LENGTH_SHORT).show();
         rvMainCat.setLayoutManager(new GridLayoutManager(getActivity(), 1));
         rvMainCat.setAdapter(adapter);
         pd = Utility.getDialog(getActivity());

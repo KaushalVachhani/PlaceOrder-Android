@@ -3,6 +3,7 @@ package com.example.vachhani.place_order.Activity;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
@@ -120,7 +121,7 @@ public class CartActivity extends BaseActivity implements PaymentResultListener 
 
             if (list.size() < 1) {
                 txtEmpty.setVisibility(View.VISIBLE);
-                txtEmpty.setText("No Items in cart ! ");
+                txtEmpty.setText("No Items in cart !  ");
             }
             adapter.setList(list);
 
@@ -266,6 +267,8 @@ public class CartActivity extends BaseActivity implements PaymentResultListener 
                         refresh();
                         Snackbar snackbar = Snackbar.make(llCart, "order is placed!!!!", Snackbar.LENGTH_SHORT);
                         snackbar.show();
+                        Intent intent = new Intent(CartActivity.this,MenuDisplayActivity_.class);
+                        startActivity(intent);
 
                     }
                 }, new Response.ErrorListener() {

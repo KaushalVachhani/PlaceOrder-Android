@@ -10,16 +10,17 @@
     <include layout="@layout/app_bar" />
 
     <TextView
+        android:id="@+id/txtEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginBottom="50dp"
+        android:fontFamily="@font/myfont"
         android:gravity="center"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="25dp"
-        android:layout_marginBottom="50dp"
-        android:id="@+id/txtEmpty"
-        android:fontFamily="@font/myfont"
-        android:layout_below="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"/>
+        android:visibility="gone" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvCart"
         android:layout_width="match_parent"
@@ -30,12 +31,12 @@
     </android.support.v7.widget.RecyclerView>
 
     <TextView
-        android:fontFamily="@font/myfont"
         android:id="@+id/txtTotal"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:background="@color/colorPrimaryDark"
+        android:fontFamily="@font/myfont"
         android:gravity="center"
         android:text="Total Amount : 1000"
         android:textColor="@color/primaryTextColor"
