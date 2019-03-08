@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "440960887439",
+    "firebase_url": "https://placeorder-ceede.firebaseio.com",
+    "project_id": "placeorder-ceede",
+    "storage_bucket": "placeorder-ceede.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:440960887439:android:a4a35007418acb59",
+        "android_client_info": {
+          "package_name": "com.example.vachhani.place_order"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "440960887439-tetbdo8fp29c41dlhru8mb50r9e1rfa2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.vachhani.place_order",
+            "certificate_hash": "16d9ef177b180c992f04b0d16b8627f7281e4fa4"
+          }
+        },
+        {
+          "client_id": "440960887439-3nqvnc8llg22f2oop0iti00l350asq5q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTfKwvBkAkk2R4Csb2K_XsFy5njJKmVR8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "440960887439-3nqvnc8llg22f2oop0iti00l350asq5q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

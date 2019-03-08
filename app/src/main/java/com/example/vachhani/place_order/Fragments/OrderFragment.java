@@ -40,6 +40,7 @@ public class OrderFragment extends Fragment {
     ProgressDialog pd;
     CPref_ pref;
     String order_date;
+    int length;
 
     @Bean
     OrdersAdapter adapter;
@@ -74,25 +75,46 @@ public class OrderFragment extends Fragment {
                             Log.d("Response", String.valueOf(array));
 
                             for (int i = 0; i < array.length(); i++) {
-                                Order order = new Order();
-                                order.productId = array.getJSONObject(i).getString("product_id");
-                                order.productImg = array.getJSONObject(i).getString("product_image");
-                                order.productName = array.getJSONObject(i).getString("product_name");
-                                order.qty = array.getJSONObject(i).getString("qty");
-                                int qty = Integer.parseInt(order.qty);
-                                order.toping = array.getJSONObject(i).getString("topings");
-                                order.totalPrice = Integer.parseInt((array.getJSONObject(i).getString("price"))) * qty + "";
-                                order.orderId = array.getJSONObject(i).getJSONObject("id").getString("$id");
-                                order_date = String.valueOf(array.getJSONObject(i).getString("date"));
-                                StringTokenizer tk = new StringTokenizer(order_date);
-                                String date = tk.nextToken();
-                                Log.d("date", date);
-                                order.date = date;
 
-                                list.add(order);
+                                int flag = 0;
+                                for (Order o : list) {
+                                    if (o.orderId.equals(array.getJSONObject(i).getString("order_id"))) {
+                                        flag++;
+                                        length = count(o.productName);
+                                        o.productName[length] = array.getJSONObject(i).getString("product_name");
+                                        o.productId[length] = array.getJSONObject(i).getString("product_id");
+                                        o.qty[length] = array.getJSONObject(i).getString("qty");
+                                        o.toping[length] = array.getJSONObject(i).getString("topings");
+                                        o.totalPrice[length] = Integer.parseInt((array.getJSONObject(i).getString("price"))) * Integer.parseInt(o.qty[length]) + "";
+                                    }
+                                }
 
+
+                                if (flag == 0) {
+                                    Order order = new Order();
+                                    length = count(order.productName);
+                                    order.productId[length] = array.getJSONObject(i).getString("product_id");
+                                    order.productImg = array.getJSONObject(i).getString("product_image");
+                                    order.productName[length] = array.getJSONObject(i).getString("product_name");
+                                    order.qty[length] = array.getJSONObject(i).getString("qty");
+                                    int qty = Integer.parseInt(order.qty[length]);
+                                    order.toping[length] = array.getJSONObject(i).getString("topings");
+                                    order.totalPrice[length] = Integer.parseInt((array.getJSONObject(i).getString("price"))) * qty + "";
+                                    order.orderId = array.getJSONObject(i).getString("order_id");
+                                    order_date = String.valueOf(array.getJSONObject(i).getString("date"));
+                                    StringTokenizer tk = new StringTokenizer(order_date);
+                                    String date = tk.nextToken();
+                                    Log.d("date", date);
+                                    order.date = date;
+                                    list.add(order);
+
+                                }
+
+                                Log.d("product ----->", list.toString());
+                                adapter.setList(list);
+                                pd.dismiss();
                             }
-                            adapter.setList(list);
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -123,6 +145,14 @@ public class OrderFragment extends Fragment {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(request);
 
+    }
+
+    public int count(Object[] array) {
+        int c = 0;
+        for (Object el : array) {
+            if (el != null) c++;
+        }
+        return c;
     }
 
 

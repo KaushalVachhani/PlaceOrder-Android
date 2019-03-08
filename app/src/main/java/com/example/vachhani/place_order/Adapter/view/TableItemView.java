@@ -70,7 +70,7 @@ public class TableItemView extends LinearLayout {
             //set the table number in pref.
             cPref.table_num().put(Integer.valueOf(data.tableNo));
             getContext().startActivity(new Intent(getContext(), MenuDisplayActivity_.class));
-            load();
+            //load();
         } else
             new AlertDialog.Builder(getContext()).setMessage("opps!!!! \n \nTable is already booked").setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override

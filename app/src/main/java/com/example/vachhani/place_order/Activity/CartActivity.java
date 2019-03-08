@@ -230,6 +230,7 @@ public class CartActivity extends BaseActivity implements PaymentResultListener 
             map.put("qty", String.valueOf(dataContext.userObjectSet.get(i).qty));
             map.put("price", String.valueOf(dataContext.userObjectSet.get(i).price));
             map.put("table_no", pref.table_num().get()+"");
+            map.put("order_id", String.valueOf(new Date().getTime()));
             map.put("token", pref.token().get());
             map.put("uid",pref.userID().get());
             map.put("datetime", String.valueOf(currentDateandTime));
