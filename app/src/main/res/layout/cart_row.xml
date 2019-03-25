@@ -9,83 +9,84 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:orientation="horizontal">
-
-        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/imgProduct"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:padding="5dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/txtProductName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
                 android:fontFamily="@font/myfont"
-                android:gravity="center"
                 android:text="Name"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/txtQty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:fontFamily="@font/myfont"
-                android:gravity="center"
-                android:text="Quantity:1"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtTotal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:fontFamily="@font/myfont"
-                android:gravity="center"
                 android:text="Total:100"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/txtTopings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/myfont"
+                android:text="Add special cooking instructions"
+                android:textSize="13sp" />
+
 
 
         </LinearLayout>
-    </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="5dp"
-        android:background="@color/colorPrimaryDark"></View>
+        <LinearLayout
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp">
-
-        <TextView
-            android:id="@+id/txtRemove"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fontFamily="@font/myfont"
-            android:gravity="center"
-            android:text="Remove ✕"
-            android:textColor="@color/colorPrimaryDark"
-            android:textStyle="bold" />
+            android:layout_weight="3"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/txtRemove"
+                android:layout_width="60dp"
+                android:layout_height="25dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/rounded_rectangle"
+                android:fontFamily="@font/myfont"
+                android:gravity="center"
+                android:text="Remove"
+                android:textColor="@color/colorPrimary"
+                android:textSize="13dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
     </LinearLayout>
+
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="5dp"
-        android:background="@color/colorPrimaryDark"></View>
+        android:layout_marginTop="10dp"
+        android:background="@color/light_gray">
+
+    </View>
 
 
 </LinearLayout>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/light_gray"
+        android:fontFamily="@font/myfont"
+        android:gravity="center"
+        android:text="Special Cooking Instructions"
+        android:textSize="18dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center|left"
+            android:textStyle="bold"
+            android:text="Please add your instructions.. "
+            android:textSize="12dp" />
+
+        <EditText
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:textSize="12dp" />
+
+        <TextView
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center|left"
+            android:text="The restaurant will follow your instructions on the best effort basis"
+            android:textSize="12dp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/circular_corner_short"
+            android:text="Add"
+            android:textColor="@color/primaryTextColor" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

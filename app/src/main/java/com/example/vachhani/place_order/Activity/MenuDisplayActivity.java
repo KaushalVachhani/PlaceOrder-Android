@@ -1,6 +1,7 @@
 package com.example.vachhani.place_order.Activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -58,6 +59,7 @@ public class MenuDisplayActivity extends BaseActivity implements NavigationView.
         drawer.addDrawerListener(mToggle);
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.mipmap.drawer);
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -106,7 +108,15 @@ public class MenuDisplayActivity extends BaseActivity implements NavigationView.
             txtTitle.setText(getString(R.string.order));
             fragment = new OrderFragment_();
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_share) {
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            String shareBody = "Download the app place order from here !!1";
+            String shareSub = "Download App";
+            intent.putExtra(Intent.EXTRA_SUBJECT,shareSub);
+            intent.putExtra(Intent.EXTRA_TEXT,shareBody);
+            startActivity(Intent.createChooser(intent,"Share Using"));
+
 
 
         } else if (id == R.id.nav_slideshow) {

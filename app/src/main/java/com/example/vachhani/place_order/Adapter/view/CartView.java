@@ -1,29 +1,21 @@
 package com.example.vachhani.place_order.Adapter.view;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.vachhani.place_order.Activity.CartActivity;
-import com.example.vachhani.place_order.Activity.MenuDisplayActivity_;
-import com.example.vachhani.place_order.Activity.ProductActivity_;
 import com.example.vachhani.place_order.Data.DataContext;
 import com.example.vachhani.place_order.Data.TableCart;
-import com.example.vachhani.place_order.Data.Tables;
+import com.example.vachhani.place_order.Fragments.BottomSheetFragment;
 import com.example.vachhani.place_order.R;
 import com.mobandme.ada.Entity;
 import com.mobandme.ada.exceptions.AdaFrameworkException;
-import com.squareup.picasso.Picasso;
 
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
@@ -36,7 +28,7 @@ public class CartView extends LinearLayout {
     DataContext dataContext = new DataContext(context);
 
     @ViewById
-    TextView txtProductName, txtQty, txtTotal, txtRemove;
+    TextView txtProductName, txtTotal, txtRemove, txtTopings;
 
     @ViewById
     ImageView imgProduct;
@@ -54,12 +46,15 @@ public class CartView extends LinearLayout {
     public void bind(final TableCart data) {
         this.data = data;
         int total = (data.price) * (data.qty);
-        txtProductName.setText(data.product_name);
-        txtQty.setText(String.valueOf("Quantity : " + data.qty));
-        txtTotal.setText(String.valueOf("Total : " + total));
-        Log.e("name_____________", data.product_name);
-        Picasso.with(getContext()).load(data.product_img).into(imgProduct);
-
+        txtProductName.setText(data.product_name+" x "+data.qty);
+        txtTotal.setText(String.valueOf("Rs " + total));
+        txtTopings.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BottomSheetFragment bottomSheetFragment = new BottomSheetFragment();
+                bottomSheetFragment.show(((FragmentActivity)context).getSupportFragmentManager(),bottomSheetFragment.getTag());
+            }
+        });
     }
 
     @Click

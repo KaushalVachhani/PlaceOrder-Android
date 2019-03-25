@@ -60,9 +60,9 @@ public class CartActivity extends BaseActivity implements PaymentResultListener 
     DataContext dataContext = new DataContext(this);
     ArrayList<TableCart> list = new ArrayList<>();
     TableCart cart;
-    int total;
-    String currentDateandTime;
-    SimpleDateFormat sdf;
+    int total,payment=0;
+    String currentDateandTime,order_id;
+    SimpleDateFormat sdf,ft;
     ProgressDialog pd;
 
     @ViewById
@@ -95,8 +95,11 @@ public class CartActivity extends BaseActivity implements PaymentResultListener 
         list.clear();
         fillCart();
         txtTotal.setText("Total Amount : " + String.valueOf(total));
+        Date dNow = new Date();
         sdf= new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
-        currentDateandTime = sdf.format(new Date());
+        ft = new SimpleDateFormat("yyMMddhhmmssMs");
+        currentDateandTime = sdf.format(dNow);
+        order_id = ft.format(dNow);
 
     }
 
@@ -188,6 +191,7 @@ public class CartActivity extends BaseActivity implements PaymentResultListener 
                 @Override
                 public void onClick(View view) {
                     alertDialog.dismiss();
+                    payment = 1;
                     startPayment(CartActivity.this);
                 }
             });
@@ -230,10 +234,11 @@ public class CartActivity extends BaseActivity implements PaymentResultListener 
             map.put("qty", String.valueOf(dataContext.userObjectSet.get(i).qty));
             map.put("price", String.valueOf(dataContext.userObjectSet.get(i).price));
             map.put("table_no", pref.table_num().get()+"");
-            map.put("order_id", String.valueOf(new Date().getTime()));
+            map.put("order_id", order_id);
             map.put("token", pref.token().get());
             map.put("uid",pref.userID().get());
             map.put("datetime", String.valueOf(currentDateandTime));
+            map.put("payment", String.valueOf(payment));
             Log.i("token--------->", pref.token().get());
             wordList.add(map);
         }

@@ -23,11 +23,11 @@
         android:id="@+id/tvCat"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:fontFamily="@font/funky_fonts"
+        android:fontFamily="@font/myfont"
         android:gravity="center"
         android:text="category"
         android:textColor="@color/primaryTextColor"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
 </RelativeLayout>

@@ -109,11 +109,11 @@ public class OrderFragment extends Fragment {
                                     list.add(order);
 
                                 }
-
-                                Log.d("product ----->", list.toString());
-                                adapter.setList(list);
-                                pd.dismiss();
                             }
+
+                            Log.d("product ----->", list.toString());
+                            adapter.setList(list);
+                            pd.dismiss();
 
 
                         } catch (JSONException e) {
