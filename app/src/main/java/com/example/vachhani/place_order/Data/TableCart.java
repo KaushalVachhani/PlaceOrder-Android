@@ -20,4 +20,6 @@ public class    TableCart extends com.mobandme.ada.Entity{
     public String product_name;
     @TableField(name = "product_img",datatype = DATATYPE_STRING)
     public String product_img;
+    @TableField(name = "topings",datatype = DATATYPE_STRING)
+    public String topings;
 }

@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
 
     <TextView
         android:layout_width="match_parent"
@@ -28,6 +30,7 @@
             android:textSize="12dp" />
 
         <EditText
+            android:id="@+id/edtTopings"
             android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="35dp"
@@ -38,10 +41,11 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:gravity="center|left"
-            android:text="The restaurant will follow your instructions on the best effort basis"
+            android:text="(The restaurant will follow your instructions on the best effort basis.)"
             android:textSize="12dp" />
 
         <Button
+            android:id="@+id/btnAdd"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="20dp"

@@ -1,5 +1,7 @@
-package com.example.vachhani.place_order.Activity;
+package com.example.vachhani.place_order.Fragments;
 
+import android.app.ProgressDialog;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -17,11 +19,12 @@ import com.android.volley.toolbox.Volley;
 import com.example.vachhani.place_order.Adapter.TablesAdapter;
 import com.example.vachhani.place_order.Data.Tables;
 import com.example.vachhani.place_order.R;
+import com.example.vachhani.place_order.Utils.CPref_;
 import com.example.vachhani.place_order.Utils.Utility;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
-import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,10 +34,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-@EActivity(R.layout.activity_main)
-public class MainActivity extends BaseActivity {
+@EFragment(R.layout.fragment_tables)
+public class TableFragment extends Fragment {
 
-//    TokenRefresh tokenRefresh;
+    ProgressDialog pd;
+    CPref_ pref;
 
     @ViewById
     RecyclerView rvTables;
@@ -52,20 +56,15 @@ public class MainActivity extends BaseActivity {
 
     @AfterViews
     void init() {
-        loads();
-//        tokenRefresh = new TokenRefresh(this,pref);
-//        tokenRefresh.onTokenRefresh();
+        pd = Utility.getDialog(getActivity());
+        pref = new CPref_(getActivity());
         load();
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        txtTitle.setText(getString(R.string.select_table));
-        rvTables.setLayoutManager(new GridLayoutManager(this, 3));
+        rvTables.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         rvTables.setAdapter(adapter);
     }
 
     @Override
-    protected void onResume() {
+    public void onResume(){
         super.onResume();
         load();
     }
@@ -115,7 +114,7 @@ public class MainActivity extends BaseActivity {
             }
         };
 
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         request.setRetryPolicy(new DefaultRetryPolicy(
                 7000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
@@ -123,4 +122,6 @@ public class MainActivity extends BaseActivity {
         requestQueue.add(request);
 
     }
+
+
 }

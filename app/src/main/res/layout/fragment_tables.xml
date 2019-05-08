@@ -4,9 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     android:background="@android:color/white">
 
-    <include layout="@layout/app_bar"/>
+    <!--<include layout="@layout/app_bar"/>-->
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvTables"
@@ -19,10 +20,12 @@
         android:gravity="bottom|center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="30dp"
         android:fontFamily="@font/myfont"
         android:textColor="@color/dark_gray"
-        android:text="Tables with '✔' marks are already booked tables."/>
+        android:text="Tables with '✔' mark are already booked tables."/>
 
 
 </LinearLayout>

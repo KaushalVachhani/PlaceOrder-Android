@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="100dp"
-    android:layout_height="100dp"
+    android:layout_height="110dp"
     android:layout_margin="10dp"
     android:id="@+id/root"
     android:background="@drawable/background"
@@ -24,12 +24,30 @@
         android:textSize="16sp"
         android:textStyle="bold" />
 
-    <ImageView
-        android:id="@+id/imgStatus"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="5dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/ic_done" />
+        android:layout_centerHorizontal="true">
+        <TextView
+            android:id="@+id/txt_seats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="seats(4) "
+            android:fontFamily="@font/myfont"
+            android:textSize="15dp"
+            android:textColor="@color/primaryTextColor"/>
+        <ImageView
+            android:id="@+id/imgStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_done" />
+
+    </LinearLayout>
+
+
 
 </RelativeLayout>

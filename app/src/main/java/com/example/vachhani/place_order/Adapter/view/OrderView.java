@@ -17,7 +17,7 @@ import org.androidannotations.annotations.ViewById;
 public class OrderView extends LinearLayout {
 
     @ViewById
-    TextView tvOrder, tvItem,tvDate;
+    TextView tvOrder, tvItem,tvDate,tvDetails;
 
 //    @ViewById
 //    ImageView imgProduct;
@@ -41,7 +41,7 @@ public class OrderView extends LinearLayout {
         tvDate.setText("Ordered On : "+data.date);
         //Picasso.with(getContext()).load(data.productImg).into(imgProduct);
         tvOrder.setText("Order Id : " + data.orderId);
-        llOrder.setOnClickListener(new OnClickListener() {
+        tvDetails.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 getContext().startActivity(new Intent(getContext(), OrderDetailActivity.class).putExtra("orderId", data.orderId).putExtra("img", data.productImg).putExtra("product_name", data.productName).putExtra("qty", data.qty).putExtra("topings", data.toping).putExtra("price", data.totalPrice).putExtra("date", data.date));

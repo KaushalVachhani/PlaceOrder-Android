@@ -1,7 +1,6 @@
 package com.example.vachhani.place_order.Utils;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
@@ -21,7 +20,7 @@ public class TokenRefresh extends FirebaseInstanceIdService{
     public void onTokenRefresh() {
         // Get updated InstanceID token.
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        Log.i("Refreshed token: ", refreshedToken);
+        //Log.i("Refreshed token: ", refreshedToken);
         pref.token().put(refreshedToken);
 
         //Log.d(TAG, "Refreshed token: " + refreshedToken);

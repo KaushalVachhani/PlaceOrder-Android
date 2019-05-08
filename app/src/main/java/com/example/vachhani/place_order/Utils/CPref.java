@@ -32,7 +32,7 @@ public interface CPref {
     @DefaultString("")
     public String mobile_num();
 
-    @DefaultInt(0)
+    @DefaultInt(-1)
     public int table_num();
 //
 //    @DefaultString("")

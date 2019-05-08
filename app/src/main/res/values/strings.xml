@@ -4,7 +4,9 @@
     <string name="select_menu">Food Menu</string>
     <string name="your_order">Your Order</string>
     <string name="order">Orders</string>
+    <string name="table">Tables</string>
     <string name="registration">Registration</string>
+    <string name="otp">Otp</string>
     <string name="select_item">Select Items</string>
     <string name="vegetarian">Veg</string>
     <string name="whole_item">Item Details</string>

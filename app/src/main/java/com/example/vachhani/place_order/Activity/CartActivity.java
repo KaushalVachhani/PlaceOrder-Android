@@ -60,9 +60,9 @@ public class CartActivity extends BaseActivity implements PaymentResultListener 
     DataContext dataContext = new DataContext(this);
     ArrayList<TableCart> list = new ArrayList<>();
     TableCart cart;
-    int total,payment=0;
-    String currentDateandTime,order_id;
-    SimpleDateFormat sdf,ft;
+    int total, payment = 0;
+    String currentDateandTime, order_id;
+    SimpleDateFormat sdf, ft;
     ProgressDialog pd;
 
     @ViewById
@@ -96,7 +96,7 @@ public class CartActivity extends BaseActivity implements PaymentResultListener 
         fillCart();
         txtTotal.setText("Total Amount : " + String.valueOf(total));
         Date dNow = new Date();
-        sdf= new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+        sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
         ft = new SimpleDateFormat("yyMMddhhmmssMs");
         currentDateandTime = sdf.format(dNow);
         order_id = ft.format(dNow);
@@ -151,19 +151,6 @@ public class CartActivity extends BaseActivity implements PaymentResultListener 
         return true;
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//
-//        switch (item.getItemId()) {
-//
-//            case R.id.menu_item1: {
-//                // Do something
-//                return true;
-//            }
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
-
     AlertDialog dialog;
 
     //on pay button click payment options will be open
@@ -171,37 +158,46 @@ public class CartActivity extends BaseActivity implements PaymentResultListener 
     void onMenuItemClick(MenuItem menuItem) {
 
         if (checkCart()) {
-            LayoutInflater inflater = getLayoutInflater();
-            View alertLayout = inflater.inflate(R.layout.custom_payment_dialog, null);
-            Button btnCash = alertLayout.findViewById(R.id.btnCash);
-            Button btnOnline = alertLayout.findViewById(R.id.btnOnline);
+            if (pref.table_num().get() < 0) {
+                Toast.makeText(this, "select the table first !!!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, MainActivity_.class));
+                finish();
+            } else {
+                changeFlag();
+                Log.d("flag--------->",String.valueOf(flag));
+                LayoutInflater inflater = getLayoutInflater();
+                View alertLayout = inflater.inflate(R.layout.custom_payment_dialog, null);
+                Button btnCash = alertLayout.findViewById(R.id.btnCash);
+                Button btnOnline = alertLayout.findViewById(R.id.btnOnline);
 
-            final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-            alertDialog.setView(alertLayout);
+                final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+                alertDialog.setView(alertLayout);
 
-            btnCash.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    alertDialog.dismiss();
-                    load();
-                }
-            });
+                btnCash.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        alertDialog.dismiss();
+                        load();
+                    }
+                });
 
-            btnOnline.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    alertDialog.dismiss();
-                    payment = 1;
-                    startPayment(CartActivity.this);
-                }
-            });
+                btnOnline.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        alertDialog.dismiss();
+                        payment = 1;
+                        startPayment(CartActivity.this);
+                    }
+                });
 
-            alertDialog.show();
+                alertDialog.show();
+            }
+
         } else {
             Snackbar snackbar = Snackbar.make(llCart, "No items in cart!!!", Snackbar.LENGTH_SHORT);
             snackbar.show();
         }
-        
+
 
     }
 
@@ -233,10 +229,11 @@ public class CartActivity extends BaseActivity implements PaymentResultListener 
             map.put("product_id", dataContext.userObjectSet.get(i).product_id);
             map.put("qty", String.valueOf(dataContext.userObjectSet.get(i).qty));
             map.put("price", String.valueOf(dataContext.userObjectSet.get(i).price));
-            map.put("table_no", pref.table_num().get()+"");
+            map.put("topings", String.valueOf(dataContext.userObjectSet.get(i).topings));
+            map.put("table_no", pref.table_num().get() + "");
             map.put("order_id", order_id);
             map.put("token", pref.token().get());
-            map.put("uid",pref.userID().get());
+            map.put("uid", pref.userID().get());
             map.put("datetime", String.valueOf(currentDateandTime));
             map.put("payment", String.valueOf(payment));
             Log.i("token--------->", pref.token().get());
@@ -258,7 +255,7 @@ public class CartActivity extends BaseActivity implements PaymentResultListener 
                     public void onResponse(String s) {
                         pd.hide();
                         pd.dismiss();
-                        Log.i("RESPONSE----->", s );
+                        Log.i("RESPONSE----->", s);
                         try {
                             dataContext.userObjectSet.fill();
                             for (int i = 0; i < dataContext.userObjectSet.size(); i++) {
@@ -273,7 +270,7 @@ public class CartActivity extends BaseActivity implements PaymentResultListener 
                         refresh();
                         Snackbar snackbar = Snackbar.make(llCart, "order is placed!!!!", Snackbar.LENGTH_SHORT);
                         snackbar.show();
-                        Intent intent = new Intent(CartActivity.this,MenuDisplayActivity_.class);
+                        Intent intent = new Intent(CartActivity.this, MenuDisplayActivity_.class);
                         startActivity(intent);
 
                     }

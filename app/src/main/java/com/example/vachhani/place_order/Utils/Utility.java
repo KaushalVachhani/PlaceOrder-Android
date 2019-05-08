@@ -1,10 +1,7 @@
 package com.example.vachhani.place_order.Utils;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 
 public class Utility {
